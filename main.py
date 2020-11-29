@@ -1,31 +1,31 @@
 file = open('steam (1).csv', encoding='utf-8')
-MainList = []
+main_list = []
 column = 2
-FullHeaders = file.readline().split(',')
-headers = FullHeaders[2:]
+full_headers = file.readline().split(',')
+headers = full_headers[2:]
 lines = file.readlines()
 for line in lines:
-    SplitedStr = line.split(',')
-    SplitedElems = []
-    for elem in SplitedStr:
-        SplitedElems.append(elem.split(';'))
-    MainList.append(SplitedElems)
-for ColumnName in headers:
-    FileteredList = []
-    print('Введите ', ColumnName)
-    InsertParams = input().split(',')
-    for param in MainList:
-        if bool(set(param[column]) & set(InsertParams)) or InsertParams[0] == '':
-            FileteredList.append(param)
+    splited_str = line.split(',')
+    splited_elems = []
+    for elem in splited_str:
+        splited_elems.append(elem.split(';'))
+    main_list.append(splited_elems)
+for column_name in headers:
+    filetered_list = []
+    print('Введите ', column_name)
+    insert_params = input().split(',')
+    for param in main_list:
+        if bool(set(param[column]) & set(insert_params)) or insert_params[0] == '':
+            filetered_list.append(param)
     column += 1
-    MainList = FileteredList
+    main_list = filetered_list
 file.close()
 
 results = open('result', 'w', encoding='utf-8')
-for param in MainList:
+for param in main_list:
     column = 0
     results.write('Вам подходит игра: \n')
-    for elem in FullHeaders:
+    for elem in full_headers:
         results.write(elem + ' : ')
         for m in param[column]:
             results.write(m + ' ')
